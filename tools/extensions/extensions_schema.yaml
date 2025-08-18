@@ -136,6 +136,7 @@ categories:
 - envoy.path.match
 - envoy.path.rewrite
 - envoy.tls_handshakers
+- envoy.tls.certificate_selectors
 - envoy.generic_proxy.filters
 - envoy.generic_proxy.codecs
 - envoy.load_balancing_policies

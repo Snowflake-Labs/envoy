@@ -49,6 +49,12 @@ CONTRIB_EXTENSIONS = {
     "envoy.tls.key_providers.qat":                              "//contrib/qat/private_key_providers/source:config",
 
     #
+    # TLS certificate selectors
+    #
+
+    "envoy.tls.certificate_selectors.dynamic_sds":             "//contrib/dynamic_sds_certificate_selector/source:config",
+
+    #
     # Socket interface extensions
     #
 

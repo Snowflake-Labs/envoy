@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package envoy.extensions.transport_sockets.tls.certificate_selectors.dynamic_sds.v3alpha;
+
+import "envoy/config/core/v3/config_source.proto";
+import "envoy/type/matcher/v3/regex.proto";
+
+import "google/protobuf/duration.proto";
+
+import "xds/annotations/v3/status.proto";
+
+import "udpa/annotations/status.proto";
+import "validate/validate.proto";
+
+option java_package = "io.envoyproxy.envoy.extensions.transport_sockets.tls.certificate_selectors.dynamic_sds.v3alpha";
+option java_outer_classname = "ConfigProto";
+option java_multiple_files = true;
+option go_package = "github.com/envoyproxy/go-control-plane/contrib/envoy/extensions/transport_sockets/tls/certificate_selectors/dynamic_sds/v3alpha";
+option (udpa.annotations.file_status).package_version_status = ACTIVE;
+option (xds.annotations.v3.file_status).work_in_progress = true;
+
+// [#protodoc-title: Dynamic SDS Certificate Selector]
+// [#extension: envoy.tls.certificate_selectors.dynamic_sds]
+
+// Dynamic SDS Certificate Selector Configuration.
+// This extension enables dynamic TLS certificate selection during SSL handshake
+// based on connection metadata using regex-based matching. It uses individual SDS
+// subscription approach and can be enhanced to support collection subscriptions
+// for better performance with large certificate counts.
+// Statistics are always collected for monitoring and debugging.
+message DynamicSdsCertificateSelectorConfig {
+  // Certificate selection rule that maps regex patterns to certificate names.
+  message SelectionRule {
+    // TODO (igadot): [future] other types of selection rules? (e.g. filter state for arbitrary logic in the network filter according to the ip/client hellp?)
+    // Regular expression pattern to match against the input source.
+    type.matcher.v3.RegexMatchAndSubstitute sni_value_rewrite = 1
+        [(validate.rules).message = {required: true}];
+  }
+
+  // SDS configuration source for certificate lookup.
+  config.core.v3.ConfigSource sds_source = 1 [(validate.rules).message = {required: true}];
+
+  // Certificate cache configuration to optimize performance.
+  CacheConfig cache_config = 2;
+
+  // Enable fallback to the default certificate selector.
+  // This provides a safety net during rollout or when the extension fails.
+  bool enable_default_selector_fallback = 3;
+
+  // List of selection rules evaluated in order. First matching rule wins.
+  // If no rules match, the connection will use the default certificate selector fallback if enabled.
+  repeated SelectionRule rules = 4 [(validate.rules).repeated = {min_items: 1}];
+}
+
+// Certificate cache configuration for performance optimization.
+message CacheConfig {
+  // Time-to-live for cached certificates.
+  // Certificates will be evicted from cache after this duration to ensure freshness.
+  google.protobuf.Duration cache_ttl = 1 [(validate.rules).duration = {gte {seconds: 600}}];
+
+  // Maximum number of certificates to cache (0 for unlimited)
+  uint32 max_cache_entries = 2;
+
+  // Cache eviction check interval.
+  // How frequently to scan for and remove expired cache entries.
+  google.protobuf.Duration eviction_interval = 3 [(validate.rules).duration = {gte {seconds: 30}}];
+}
