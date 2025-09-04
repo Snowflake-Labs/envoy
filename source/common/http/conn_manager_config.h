@@ -106,7 +106,7 @@ struct ConnectionManagerNamedStats {
 struct ConnectionManagerStats {
   // Use a single constexpr for array size.
   static constexpr uint32_t kHttpCodeOffset = Envoy::Http::CodeStatsImpl::HttpCodeOffset;
-  static constexpr uint32_t kArraySize = Envoy::Http::CodeStatsImpl::NumHttpCodes - kHttpCodeOffset;
+  static constexpr uint32_t kArraySize = Envoy::Http::CodeStatsImpl::NumHttpCodes;
 
   ConnectionManagerStats(ConnectionManagerNamedStats&& named_stats, const std::string& prefix,
                          Stats::Scope& scope)

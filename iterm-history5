@@ -1,0 +1,500 @@
+  117  curl https://snowflake.temptest004031.us-west-2.aws.snowflakecomputing.com/console
+  118  host snowflake.temptest004031.us-west-2.aws.snowflakecomputing.com
+  119  host aab1adeb8a95d2a30702347d447b8f7b-ea50adc9c913343e.elb.us-west-2.amazonaws.com
+  120  curl https://snowflake.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  121  curl -v https://snowflake.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  122  host aab1adeb8a95d2a30702347d447b8f7b-ea50adc9c913343e.elb.us-west-2.amazonaws.com
+  123  host snowflake.temptest004031.us-west-2.aws.snowflakecomputing.com
+  124  vi /etc/hosts
+  125  sudo vi /etc/hosts
+  126  cat /etc/hosts| grep telemetry
+  127  curl -v telemetrytest.telemetry.temptest004031.snowflakecomputing.com
+  128  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com
+  129  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com
+  130  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream
+  131  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream
+  132  host telemetrytest.telemetry.temptest004031.snowflakecomputing.com
+  133  vi /etc/hosts
+  134  sudo vi /etc/hosts
+  135  nslookup telemetrytest.telemetry.temptest004031.snowflakecomputing.com
+  136  ping telemetrytest.telemetry.temptest004031.snowflakecomputing.com
+  137  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream | more
+  138  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  139  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  140  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  141  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  142  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  143  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  144  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  145  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  146  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  147  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  148  curl -v https://telemetrytest.telemetry.temptest004031.snowflakecomputing.com/ready-no-uping.com/ready-no-upstream 
+  149  ./loadtest.sh 
+  150  fortio load -c 1 -qps 1  -t 1s -timeout 1s -loglevel Error -allow-initial-errors http://localhost:10002/408
+  151  fortio load -c 1 -qps 1  -t 1s -timeout 1s -loglevel Error -allow-initial-errors http://localhost:10002/408
+  152  curl -v http://localhost:10002/example
+  153  curl -v http://localhost:10002/example
+  154  curl -v http://localhost:10002/exampla
+  155  curl -v http://localhost:10002/exampla
+  156  curl -v http://localhost:10002/exampla
+  157  curl -v http://localhost:10002/exampla
+  158  curl -v http://localhost:10002/exampla
+  159  curl -v http://localhost:10002/exampla
+  160  grep Traffic-Envoy envoy-server.log
+  161  curl -v http://localhost:10002/exampla
+  162  curl -v http://localhost:10002/exampla
+  163  curl -v http://localhost:10002/exampla
+  164  grep Traffic-Envoy envoy-server.log
+  165  curl -v http://localhost:10002/exampla
+  166  curl -v http://localhost:10002/example
+  167  curl -v http://localhost:10002/exampla
+  168  curl -v http://localhost:10002/example
+  169  curl -v http://localhost:10002/example
+  170  curl -v http://localhost:10002/exampla
+  171  curl -v http://localhost:10002/exampla
+  172  curl -v http://localhost:10002/example
+  173  curl -v -k http://localhost:10002/example
+  174  grep Traffic-Envoy envoy-server.log
+  175  curl -v -k http://localhost:10002/example
+  176  curl -v http://localhost:10002/exampla
+  177  grep Traffic-Envoy envoy-server.log
+  178  vi envoy.yaml 
+  179  ./loadtest
+  180  ./loadtest.sh 
+  181  kill %1
+  182  ps -ef| grep fortio
+  183  kill -9 92784
+  184  ./loadtest.sh 
+  185  ./loadtest.sh 
+  186  kill %1
+  187  ./loadtest.sh 
+  188  kill %1
+  189  ps -ef|grep fortio
+  190  kill -9 11051 12672
+  191  ./loadtest.sh 
+  192  sudo yum install yum-utils pygpgme 
+  193  cd ~/gitext/clone2/
+  194  cd envoy
+  195  git checkout .
+  196  git apply ~/work/envoy/ext/cms-stats-singlerq.patch 
+  197  ci/extensions_mac_ci_steps.sh 
+  198  pwd
+  199  grep -r downstreamRqStatName .
+  200  ci/extensions_mac_ci_steps.sh 
+  201  ci/extensions_mac_ci_steps.sh 
+  202  ci/extensions_mac_ci_steps.sh 
+  203  git checkout .
+  204  git apply ~/work/envoy/ext/cms-stats-singlerq.patch 
+  205  ci/extensions_mac_ci_steps.sh 
+  206  ci/extensions_mac_ci_steps.sh 
+  207  ci/extensions_mac_ci_steps.sh 
+  208  ci/extensions_mac_ci_steps.sh 
+  209  ci/extensions_mac_ci_steps.sh 
+  210  ci/extensions_mac_ci_steps.sh 
+  211  ci/extensions_mac_ci_steps.sh 
+  212  ci/extensions_mac_ci_steps.sh 
+  213  bazel clean
+  214  ci/extensions_mac_ci_steps.sh 
+  215  ci/extensions_mac_ci_steps.sh 
+  216  ci/extensions_mac_ci_steps.sh 
+  217  ci/extensions_mac_ci_steps.sh 
+  218  ci/extensions_mac_ci_steps.sh 
+  219  ci/extensions_mac_ci_steps.sh 
+  220  cat /private/var/tmp/_bazel_rvijayan/e43c27a0e5c9614fdfc0405e9e514e72/execroot/envoy/bazel-out/darwin_arm64-fastbuild/testlogs/test/integration/protocol_integration_test/shard_16_of_16/test_attempts/attempt_1.log
+  221  cat /private/var/tmp/_bazel_rvijayan/e43c27a0e5c9614fdfc0405e9e514e72/execroot/envoy/bazel-out/darwin_arm64-fastbuild/testlogs/test/integration/protocol_integration_test/shard_16_of_16/test_attempts/attempt_1.log
+  222  ci/extensions_mac_ci_steps.sh 
+  223  cat   /private/var/tmp/_bazel_rvijayan/e43c27a0e5c9614fdfc0405e9e514e72/execroot/envoy/bazel-out/darwin_arm64-fastbuild/testlogs/test/integration/protocol_integration_test/shard_16_of_16/test_attempts/attempt_1.log
+  224  ci/extensions_mac_ci_steps.sh 
+  225  pwd
+  226  ci/extensions_mac_ci_steps.sh 
+  227  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code='
+  228  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code='|grep upst
+  229  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code='
+  230  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  231  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  232  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  233  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  234  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  235  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  236  ci/extensions_mac_ci_steps.sh 
+  237  ci/extensions_mac_ci_steps.sh 
+  238  git diff > /tmp/test
+  239  diff /tmp/test ~/work/envoy/ext/cms-stats-singlerq-perf-atomic-latest.patch 
+  240  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  241  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep 408
+  242  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  243  ci/extensions_mac_ci_steps.sh 
+  244  ci/extensions_mac_ci_steps.sh 
+  245  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  246  ci/extensions_mac_ci_steps.sh 
+  247  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  248  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  249  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  250  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  251  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  252  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  253  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  254  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  255  curl http://localhost:9901/stats/prometheus 2>/dev/null| grep envoy_response_code | grep 'envoy_response_code=' | grep '"408"'
+  256  cd ~/Downloads/
+  257  cd -
+  258  python3 ~/Downloads/test.py 
+  259  python3 ~/Downloads/test.py 
+  260  python3 ~/Downloads/test.py 
+  261  python3 ~/Downloads/test.py 
+  262  python3 ~/Downloads/test.py 
+  263  python3 ~/Downloads/test.py 
+  264  python3 ~/Downloads/test.py 
+  265  python3 ~/Downloads/test.py 
+  266  python3 ~/Downloads/test.py 
+  267  python3 ~/Downloads/test.py 
+  268  python3 ~/Downloads/test.py 
+  269  python3 ~/Downloads/test.py 
+  270  python3 ~/Downloads/test.py 
+  271  python3 ~/Downloads/test.py 
+  272  python3 ~/Downloads/test.py 
+  273  python3 ~/Downloads/test.py 
+  274  python3 ~/Downloads/test.py 
+  275  python3 ~/Downloads/test.py 
+  276  python3 ~/Downloads/test.py 
+  277  python3 ~/Downloads/test.py 
+  278  python3 ~/Downloads/test.py 
+  279  python3
+  280  cd ~/Downloads/
+  281  ls -ltr
+  282  grep error log.log | grep -v XFF
+  283  grep error log.log | grep -v XFF | tail -1
+  284  grep error log.log | grep -v XFF | tail -2
+  285  grep error log.log | grep -v XFF | tail -2 | head -1
+  286  clear
+  287  grep error log.log | grep -v XFF | tail -2 | head -1
+  288  grep error log.log | grep -v XFF | tail -2 | head -1 | jq .
+  289  grep error log.log | grep -v XFF | grep corvo
+  290  grep error log.log | grep -v XFF | grep corvo | jq .
+  291  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp'
+  292  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | cut -f2 '-d:'
+  293  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | cut -f2 '-d:' | sort -u
+  294  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | grep -i fail| cut -f2 '-d:' | sort -u
+  295  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | grep -ci fail
+  296  grep error log.log | grep -v XFF | grep corvo | jq . | grep -c 'istio-green resp\|istio-blue resp' 
+  297  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | grep -i fail| cut -f2 '-d:' | sort -u
+  298  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | grep -i fail| cut -f2 '-d:' | sort -u | cut -f3 -d' ' 
+  299  grep error log.log | grep -v XFF | grep corvo | jq . | grep 'istio-green resp\|istio-blue resp' | grep -i fail| cut -f2 '-d:' | sort -u | cut -f4 -d' ' 
+  300  cd ~/gitext/clone2/envoy/
+  301  git status
+  302  git checkout .
+  303  git apply ~/work/envoy/ext/latest-with-map.patch
+  304  git apply ~/work/envoy/ext/latest-with-map.patch
+  305  git checkout .
+  306  git apply ~/work/envoy/ext/latest-with-map.patch
+  307  git diff source/common/http/conn_manager_impl.cc
+  308  pwd
+  309  git diff
+  310  git status
+  311  git diff > ~/work/envoy/ext/common-cache.patch
+  312  ci/extensions_mac_ci_steps.sh 
+  313  ci/extensions_mac_ci_steps.sh 
+  314  git diff > ~/work/envoy/ext/common-cache.patch
+  315  ci/extensions_mac_ci_steps.sh 
+  316  ci/extensions_mac_ci_steps.sh 
+  317  git diff > ~/work/envoy/ext/common-cache.patch
+  318  ci/extensions_mac_ci_steps.sh 
+  319  pwd
+  320  git diff > ~/work/envoy/ext/common-cache.patch
+  321  ci/extensions_mac_ci_steps.sh 
+  322  git diff > ~/work/envoy/ext/common-cache.patch
+  323  ci/extensions_mac_ci_steps.sh 
+  324  git diff > ~/work/envoy/ext/common-cache.patch
+  325  git checkout .
+  326  git apply /Users/rvijayan/git/envoy-agent/docker/0001-downstream-stat-per-response-code.patch
+  327  git checkout .
+  328  git apply /Users/rvijayan/git/envoy-agent/docker/0001-downstream-stat-per-response-code.patch
+  329  ci/extensions_mac_ci_steps.sh 
+  330  ci/extensions_mac_ci_steps.sh 
+  331  curl -v https://RAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  332  curl -v https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  333  curl -v https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/console
+  334  pbpaste | grep -v '^apps'
+  335  pbpaste | grep -v '^apps'| grep -v '^htt'
+  336  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws'
+  337  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure'
+  338  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp'
+  339  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core'
+  340  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core' | grep -v '^prod$'
+  341  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core' | grep -v '^prod$' | grep -v prod-small
+  342  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core' | grep -v '^prod$' | grep -v prod-small| grep -v general_purpose
+  343  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core' | grep -v '^prod$' | grep -v prod-small| grep -v general_purpose| grep -v 'regional core'
+  344  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core' | grep -v '^prod$' | grep -v prod-small| grep -v general_purpose| grep -v 'regional core' | grep -v ingress_egress
+  345  pbpaste | grep -v '^apps'| grep -v '^htt'|grep -v '^aws' | grep -v '^azure' | grep -v '^gcp' | grep -v '^core' | grep -v '^prod$' | grep -v prod-small| grep -v general_purpose| grep -v 'regional core' | grep -v ingress_egress | grep -v critical_services
+  346  pbpaste| tr '\n' '|'
+  347  pbpaste | jq .
+  348  pbpaste | jq . | grep " resp:"
+  349  pbpaste | jq . | grep ' resp":'
+  350  pbpaste | tr '\n' '\n'
+  351  git checkout .
+  352  git apply /Users/rvijayan/work/envoy/ext/common-cache.patch
+  353  git checkout .
+  354  git apply /Users/rvijayan/work/envoy/ext/common-cache.patch
+  355  ci/extensions_mac_ci_steps.sh 
+  356  export deployment_name=temptest004031
+  357  ~/sklogin 
+  358  ~/kube n
+  359  ~/kube nkubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-76d79577b7-7l2cg -- curl localhost:9901//stats/prometheus | grep 'response_code='
+  360  clear
+  361  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-76d79577b7-7l2cg -- curl localhost:9901//stats/prometheus | grep 'response_code='
+  362  export deployment_name=temptest100009
+  363  ~/kube n
+  364  ~/sklogin 
+  365  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-auto-temptest100009-db9f98f67-dngm8 -- curl localhost:9901//stats/prometheus | grep 'response_code='
+  366  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-auto-temptest100009-db9f98f67-dngm8 -- curl localhost:9901//stats/prometheus | grep 'response_code='
+  367  ~/kube n
+  368  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-846d7f6cb4-cbq8v -- curl localhost:9901//stats/prometheus | grep 'response_code='
+  369  export deployment_name=temptest004031
+  370  ~/kube n
+  371  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-76d79577b7-7l2cg -- curl localhost:9901//stats/prometheus | grep 'response_code='
+  372  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-76d79577b7-7l2cg -- curl localhost:9901//stats/prometheus | grep 'response_code_class'
+  373  ~/kube n
+  374  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-76d79577b7-7l2cg -- curl localhost:9901//stats/prometheus | grep 'response_code' | grep '200\|"2"'
+  375  git diff
+  376  ci/extensions_mac_ci_steps.sh 
+  377  ci/extensions_mac_ci_steps.sh 
+  378  ci/extensions_mac_ci_steps.sh 
+  379  git diff > ~/work/envoy/ext/common-cache-listener.patch
+  380  ci/extensions_mac_ci_steps.sh 
+  381  ci/extensions_mac_ci_steps.sh 
+  382  ci/extensions_mac_ci_steps.sh 
+  383  git diff
+  384  pbpaste | tr '\n' '|'
+  385  export deployment_name=qtemptest100009
+  386  export deployment_name=temptest100009
+  387  ~/sklogin 
+  388  ~/kube n
+  389  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2 -- curl http://localhost:9901/stats/prometheus
+  390  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2 -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code='
+  391  cd ~/work/oncall/investigate/
+  392  sanssh --justification=SNOW-2184089 --deployment=azeastus2prodshard2 --targets=10.128.227.14 httpoverrpc get 8123 /topology 
+  393  sanssh --justification=SNOW-2184089 --deployment=azeastus2prodshard2 --targets=10.128.227.14 httpoverrpc get 8123 /topology | jq . > azeastus2prodshard2-topology.json
+  394  cd -
+  395  ci/extensions_mac_ci_steps.sh 
+  396  ci/extensions_mac_ci_steps.sh 
+  397  export deployment_name=temptest004031
+  398  ~/sklogin 
+  399  ~/sklogin 
+  400  ~/sklogin 
+  401  ~/kube n
+  402  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-777d494667-k5hxm -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code='
+  403  export deployment_name=temptest100009
+  404  ~/kube n
+  405  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code='
+  406  python3
+  407  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code_class='
+  408  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code_class="2"' 
+  409  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code_class="2"'  | grep internal
+  410  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2'  | grep internal
+  411  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2\|grep 'envoy_response_code_class="2'  | grep internal
+  412  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2\|envoy_response_code_class="2'  | grep internal
+  413  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest100009-5848fd59b-hbbl2  -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2\|envoy_response_code_class="2'  | grep '"temptest100009"'
+  414  export deployment_name=temptest004031
+  415  ~/kube n
+  416  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-777d494667-k5hxm -- curl http://localhost:9901/stats/prometheus | | grep 'envoy_response_code="2\|envoy_response_code_class="2'  | grep '"temptest004031"'
+  417  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-777d494667-k5hxm -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2\|envoy_response_code_class="2'  | grep '"temptest004031"'
+  418  export deployment_name=awsuswest2qa6
+  419  ~/kube n
+  420  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-awsuswest2qa6-6x4t5  -- curl -v https://clickbench_streaming.qa6.us-west-2.aws.snowflakecomputing.com:443/v1/streaming/rowsetclient/hostname
+  421  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-awsuswest2qa6-6x4t5  -- curl https://clickbench_streaming.qa6.us-west-2.aws.snowflakecomputing.com:443/v1/streaming/rowsetclient/hostname
+  422  https://clickbench_streaming.qa6.us-west-2.aws.snowflakecomputing.com:443/v1/streaming/rowsetclient/hostname
+  423  curl -v https://clickbench_streaming.qa6.us-west-2.aws.snowflakecomputing.com:443/v1/streaming/rowsetclient/hostname
+  424  curl  https://clickbench_streaming.qa6.us-west-2.aws.snowflakecomputing.com:443/v1/streaming/rowsetclient/hostname
+  425  ci/extensions_mac_ci_steps.sh 
+  426  ci/extensions_mac_ci_steps.sh 
+  427  ci/extensions_mac_ci_steps.sh 
+  428  ci/extensions_mac_ci_steps.sh 
+  429  git checkout .
+  430  git apply /Users/rvijayan/work/envoy/ext/common-cache.patch
+  431  ci/extensions_mac_ci_steps.sh 
+  432  git checkout .
+  433  git apply /Users/rvijayan/work/envoy/ext/common-cache.patch
+  434  ci/extensions_mac_ci_steps.sh 
+  435  ci/extensions_mac_ci_steps.sh 
+  436  ci/extensions_mac_ci_steps.sh 
+  437  ci/extensions_mac_ci_steps.sh 
+  438  snowkube login cluster sfc-ec-east-high-prod-k8s-1
+  439  snowkube login cluster sfc-ec-east-high-prod-k8s-1
+  440  snowkube login cluster sfc-ec-east-high-prod-k8s-1
+  441  kubectl get services -n envoy-ingress
+  442  kubectl describe service envoy-ingress-awsusgoveast1fhplus-privatelink -n envoy-ingress
+  443  kubectl describe service envoy-ingress-awsusgoveast1fhplus-internal -n envoy-ingress
+  444  snowkube login cluster sfc-ec-high-prod-k8s-1
+  445  kubectl get services -n envoy-ingress
+  446  kubectl describe service envoy-ingress-awsusgovwest1fhplus-privatelink -n envoy-ingress
+  447  kubectl describe service envoy-ingress-awsusgovwest1fhplus-internal -n envoy-ingress | grep 'Selector\|Endpoints'
+  448  snowkube login cluster sfc-ec-prod-k8s-1
+  449  kubectl get services -n envoy-ingress
+  450  kubectl describe service envoy-ingress-awsusgovwest1-privatelink -n envoy-ingress | grep 'Selector\|Endpoints'
+  451  kubectl describe service envoy-ingress-awsusgovwest1-internal -n envoy-ingress | grep 'Selector\|Endpoints'
+  452  snowkube login cluster sfc-ec-west-high-dod-prod-k8s-1
+  453  kubectl get services -n envoy-ingress
+  454  kubectl describe service envoy-ingress-awsusgovwest1dod-privatelink -n envoy-ingress | grep 'Selector\|Endpoints'
+  455  kubectl describe service envoy-ingress-awsusgovwest1dod-internal -n envoy-ingress | grep 'Selector\|Endpoints'
+  456  snowkube login cluster sfc-or-gov-prod-k8s-1
+  457  kubectl get services -n envoy-ingress
+  458  kubectl describe service envoy-ingress-awsuswest2gov-privatelink -n envoy-ingress | grep 'Selector\|Endpoints'
+  459  kubectl describe service envoy-ingress-awsuswest2gov-internal -n envoy-ingress | grep 'Selector\|Endpoints'
+  460  snowkube login cluster sfc-va-gov-prod-k8s-1
+  461  kubectl get services -n envoy-ingress
+  462  kubectl describe service envoy-ingress-awsuseast1gov-privatelink -n envoy-ingress | grep 'Selector\|Endpoints'
+  463  kubectl describe service envoy-ingress-awsuseast1gov-internal -n envoy-ingress | grep 'Selector\|Endpoints'
+  464  snowkube login cluster usgovvirginiak8sfhpprod1
+  465  kubectl get services -n envoy-ingress
+  466  kubectl describe service envoy-ingress-azusgovvirginiafhp-privatelink -n envoy-ingress | grep 'Selector\|Endpoints'
+  467  kubectl describe service envoy-ingress-azusgovvirginiafhp-internal -n envoy-ingress | grep 'Selector\|Endpoints'
+  468  snowkube login cluster usgovvirginiak8sprod1
+  469  snowkube login cluster usgovvirginiak8sprod1
+  470  snowkube open console usgovvirginiak8sprod1
+  471  git checkout .
+  472  git apply /Users/rvijayan/work/envoy/ext/common-cache.patch
+  473  ci/extensions_mac_ci_steps.sh 
+  474  ci/extensions_mac_ci_steps.sh 
+  475  ci/extensions_mac_ci_steps.sh 
+  476  ci/extensions_mac_ci_steps.sh 
+  477  ci/extensions_mac_ci_steps.sh 
+  478  ci/extensions_mac_ci_steps.sh 
+  479  ci/extensions_mac_ci_steps.sh 
+  480  ci/extensions_mac_ci_steps.sh 
+  481  ci/extensions_mac_ci_steps.sh 
+  482  ci/extensions_mac_ci_steps.sh 
+  483  ci/extensions_mac_ci_steps.sh 
+  484  ci/extensions_mac_ci_steps.sh 
+  485  ci/extensions_mac_ci_steps.sh 
+  486  ci/extensions_mac_ci_steps.sh 
+  487  ci/extensions_mac_ci_steps.sh 
+  488  ci/extensions_mac_ci_steps.sh 
+  489  ci/extensions_mac_ci_steps.sh 
+  490  git diff > ~/work/envoy/ext/common-cache-via-upstream.patch
+  491  export deployment_name=temptest004031
+  492  ~/sklogin 
+  493  ~/sklogin 
+  494  ~/kube n
+  495  ~/kube n
+  496  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-777d494667-k5hxm -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2\|envoy_response_code_class="2'  | grep '"temptest004031"'
+  497  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-az-us-west-2b-855d69f5b8-b498p -- curl http://localhost:9901/stats/prometheus | grep 'envoy_response_code="2\|envoy_response_code_class="2'  | grep '"temptest004031"'
+  498  export deployment_name=awsuswest2qa6
+  499  exit
+  500  exit
+  501  cd ~/work/envoy/ext/
+  502  ./envoy-static-common-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  503  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  504  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  505  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  506  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  507  sudo cp ~/gitext/clone2/envoy/bazel-bin/source/exe/envoy-static envoy-static-common-vus
+  508  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  509  sudo cp ~/gitext/clone2/envoy/bazel-bin/source/exe/envoy-static envoy-static-common-vus
+  510  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  511* ls -ltr envoy-
+  512* 
+  513* 
+  514  ./envoy-static-common-vus --mode validate -c envoy-lds.yaml 
+  515  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  516  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  517  ps -ef| grep envoy
+  518  kill 39181
+  519  ./envoy-static-common-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  520  ls -ltr
+  521  fortio -h
+  522  python3
+  523  sysctl -n hw.ncpu 
+  524  fortio load -c 32  -qps 30000000 -t 1200s -timeout 1s -loglevel Error -allow-initial-errors https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  525  fortio load -c 48  -qps 30000000 -t 1200s -timeout 1s -loglevel Error -allow-initial-errors https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  526  fortio load -c 52  -qps 30000000 -t 1200s -timeout 1s -loglevel Error -allow-initial-errors https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  527  fortio load -c 100  -qps 30000000 -t 1200s -timeout 1s -loglevel Error -allow-initial-errors https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  528  sudo cp ~/gitext/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter
+  529  ./envoy-static-cms-counter -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  530  lsof -i | grep envoy
+  531  ps -ef | grep envoy
+  532  kill 59719
+  533  ps -ef | grep envoy
+  534  ./envoy-static-cms-counter -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  535  ./envoy-static-cms-counter -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  536  ./envoy-static-cms-counter -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  537  ./envoy-static-cms-counter -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  538  sudo cp ~/gitext/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter-vus
+  539  ./envoy-static-cms-counter-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  540  sudo cp ~/gitext/clone2/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter-vus
+  541  ./envoy-static-cms-counter-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  542  sudo cp ~/gitext/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter-vus
+  543  ./envoy-static-cms-counter-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  544  sudo cp ~/gitext/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter-vus
+  545  ./envoy-static-cms-counter-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  546  ./envoy-static-common -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  547  sudo cp ~/gitext/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter-vus
+  548  ./envoy-static-cms-counter-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  549  sudo cp ~/gitext/envoy/bazel-bin/source/exe/envoy-static envoy-static-cms-counter-vus
+  550  ./envoy-static-cms-counter-vus -c envoy.yaml -l debug 2>&1 | tee envoy-server.log
+  551  ./envoy-static-cms-counter-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  552  ./envoy-static-upstream-lds -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  553  ./envoy-static-cms-counter-vus -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  554  ./envoy-static-upstream-lds -c envoy-lds.yaml -l debug 2>&1 | tee envoy-server.log
+  555  cd cursor
+  556  pwd
+  557  cd ../
+  558  host probertestaccount-awsuseast1goldman.goldman.us-east-1.snowflakecomputing.com
+  559  host test.goldman.us-east-1.aws.snowflakecomputing.com
+  560  export deployment_name=temptest004031
+  561  ~/kube n
+  562  kubectl exec -n  envoy-ingress -c platform-debug-client envoy-ingress-temptest004031-az-us-west-2b-86bf9d58b9-vc45l -- fortio load  -resolve 35.155.77.255 -c 64 -qps 100000000 -t 600s -timeout 5s -loglevel Error -allow-initial-errors https://TRAFFIC-ENVOY-TEST-TEMPTEST004031.temptest004031.us-west-2.aws.snowflakecomputing.com/ready-no-upstream
+  563  cd ~/git/
+  564  ls
+  565  cd labs/
+  566  ls
+  567  cd envoy/
+  568  git branch -l
+  569  git checkout .
+  570  git apply /Users/rvijayan/git/envoy-agent/docker/0001-downstream-stat-per-response-code-cms.patch
+  571  git branch -l
+  572  git status
+  573  git checkout main
+  574  git checkout -B per-response-code-metric
+  575  git apply /Users/rvijayan/git/envoy-agent/docker/0001-downstream-stat-per-response-code-cms.patch
+  576  git status
+  577  git diff
+  578  git commit -m 'Add per-response code and via_upstream metrics'
+  579  git add .
+  580  git commit -m 'Add per-response code and via_upstream metrics'
+  581  git push
+  582      git push --set-upstream origin per-response-code-metric
+  583      git push --set-upstream origin per-response-code-metric
+  584  git branch -l
+  585  git checkout main
+  586  git checkout -B stability-push
+  587  git branch -D stability-push
+  588  git checkout master
+  589  git checkout main
+  590  git branch -D stability-push
+  591  git checkout -B per-response-code-via-upstream
+  592  git branch -l
+  593  git apply ~/work/envoy/ext/per-status-code.patch
+  594  git diff
+  595  git status
+  596  git add .
+  597  git commit -m 'per-response code downstream stats'
+  598  git push
+  599      git push --set-upstream origin per-response-code-via-upstream
+  600  cp /Users/rvijayan/gitext/envoy/source/common/http/conn_manager_impl.cc source/common/http/conn_manager_impl.cc
+  601  cp /Users/rvijayan/gitext/envoy/source/common/http/conn_manager_config.h source/common/http/conn_manager_config.h
+  602  git diff
+  603  git log
+  604  git diff
+  605  git status
+  606  git restore source/common/http/conn_manager_config.h
+  607  git restore source/common/http/conn_manager_impl.cc
+  608  git status
+  609  code source/common/http/conn_manager_impl.cc
+  610  code source/common/http/conn_manager_impl.cc
+  611  pwd
+  612  git diff
+  613  git add .
+  614  git commit -m 'add via_upstream stats'
+  615  git push
+  616  history > iterm-history5
