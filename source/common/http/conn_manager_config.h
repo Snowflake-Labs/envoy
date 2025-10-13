@@ -130,7 +130,7 @@ struct ConnectionManagerStats {
 
     auto* counter_ptr = downstream_rc_counters_.get(rc_index, [this, code]() -> Stats::Counter* {
       return &scope_.counterFromStatName(
-         stat_name_pool_.add(absl::StrCat(prefix_, "downstream_rq_", enumToInt(code)))
+         stat_name_pool_.add(absl::StrCat(prefix_, "downstream_rq_status_", enumToInt(code)))
       );
     });
     if (counter_ptr == nullptr) {
