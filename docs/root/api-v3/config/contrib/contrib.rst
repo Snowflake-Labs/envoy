@@ -16,3 +16,4 @@ Contrib extensions
   qat/qat
   http_tcp_bridge/http_tcp_bridge
   tap_sinks/tap_sinks
+  tls/dynamic_sds_certificate_selector
