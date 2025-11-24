@@ -70,6 +70,9 @@ TagNameValues::TagNameValues() {
   // *_rq_(<response_code_class>)xx
   addRe2(RESPONSE_CODE_CLASS, R"(_rq_((\d))xx$)", "_rq_");
 
+  // *_rq_status(_<response_code>)
+  addRe2(RESPONSE_CODE, R"(_rq_status(_(\d{3}))$)", "_rq_status_");
+
   // http.[<stat_prefix>.]dynamodb.table.[<table_name>.]capacity.[<operation_name>.](__partition_id=<last_seven_characters_from_partition_id>)
   addRe2(
       DYNAMO_PARTITION_ID,
