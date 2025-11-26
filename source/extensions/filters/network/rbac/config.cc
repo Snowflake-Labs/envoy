@@ -6,6 +6,7 @@
 #include "envoy/network/connection.h"
 #include "envoy/registry/registry.h"
 
+#include "source/common/protobuf/utility.h"
 #include "source/extensions/filters/network/rbac/rbac_filter.h"
 #include "source/extensions/filters/network/well_known_names.h"
 
@@ -74,23 +75,50 @@ static void validateRbacRules(const envoy::config::rbac::v3::RBAC& rules) {
   }
 }
 
-Network::FilterFactoryCb
-RoleBasedAccessControlNetworkFilterConfigFactory::createFilterFactoryFromProtoTyped(
-    const envoy::extensions::filters::network::rbac::v3::RBAC& proto_config,
-    Server::Configuration::FactoryContext& context) {
+static RoleBasedAccessControlFilterConfigSharedPtr
+createFilterConfig(const envoy::extensions::filters::network::rbac::v3::RBAC& proto_config,
+                   Stats::Scope& scope, Server::Configuration::ServerFactoryContext& context,
+                   ProtobufMessage::ValidationVisitor& validation_visitor) {
   if (proto_config.has_rules()) {
     validateRbacRules(proto_config.rules());
   }
   if (proto_config.has_shadow_rules()) {
     validateRbacRules(proto_config.shadow_rules());
   }
-  RoleBasedAccessControlFilterConfigSharedPtr config(
-      std::make_shared<RoleBasedAccessControlFilterConfig>(proto_config, context.scope(),
-                                                           context.serverFactoryContext(),
-                                                           context.messageValidationVisitor()));
+  return std::make_shared<RoleBasedAccessControlFilterConfig>(proto_config, scope, context,
+                                                              validation_visitor);
+}
+
+Network::FilterFactoryCb
+RoleBasedAccessControlNetworkFilterConfigFactory::createFilterFactoryFromProtoTyped(
+    const envoy::extensions::filters::network::rbac::v3::RBAC& proto_config,
+    Server::Configuration::FactoryContext& context) {
+  RoleBasedAccessControlFilterConfigSharedPtr config =
+      createFilterConfig(proto_config, context.scope(), context.serverFactoryContext(),
+                         context.messageValidationVisitor());
   return [config](Network::FilterManager& filter_manager) -> void {
     filter_manager.addReadFilter(std::make_shared<RoleBasedAccessControlFilter>(config));
   };
+}
+
+Network::FilterFactoryCb
+RoleBasedAccessControlUpstreamNetworkFilterConfigFactory::createFilterFactoryFromProto(
+    const Protobuf::Message& config,
+    Server::Configuration::UpstreamFactoryContext& context) {
+  const auto& proto_config = MessageUtil::downcastAndValidate<
+      const envoy::extensions::filters::network::rbac::v3::RBAC&>(
+      config, context.serverFactoryContext().messageValidationVisitor());
+  RoleBasedAccessControlFilterConfigSharedPtr filter_config =
+      createFilterConfig(proto_config, context.scope(), context.serverFactoryContext(),
+                         context.serverFactoryContext().messageValidationVisitor());
+  return [filter_config](Network::FilterManager& filter_manager) -> void {
+    filter_manager.addReadFilter(std::make_shared<RoleBasedAccessControlFilter>(filter_config));
+  };
+}
+
+ProtobufTypes::MessagePtr
+RoleBasedAccessControlUpstreamNetworkFilterConfigFactory::createEmptyConfigProto() {
+  return std::make_unique<envoy::extensions::filters::network::rbac::v3::RBAC>();
 }
 
 /**
@@ -98,6 +126,8 @@ RoleBasedAccessControlNetworkFilterConfigFactory::createFilterFactoryFromProtoTy
  */
 REGISTER_FACTORY(RoleBasedAccessControlNetworkFilterConfigFactory,
                  Server::Configuration::NamedNetworkFilterConfigFactory);
+REGISTER_FACTORY(RoleBasedAccessControlUpstreamNetworkFilterConfigFactory,
+                 Server::Configuration::NamedUpstreamNetworkFilterConfigFactory);
 
 } // namespace RBACFilter
 } // namespace NetworkFilters

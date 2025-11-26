@@ -6,6 +6,7 @@ import "envoy/config/core/v3/base.proto";
 import "envoy/config/route/v3/route_components.proto";
 import "envoy/data/accesslog/v3/accesslog.proto";
 import "envoy/type/matcher/v3/metadata.proto";
+import "envoy/type/matcher/v3/string.proto";
 import "envoy/type/v3/percent.proto";
 
 import "google/protobuf/any.proto";
@@ -44,7 +45,7 @@ message AccessLog {
   }
 }
 
-// [#next-free-field: 14]
+// [#next-free-field: 15]
 message AccessLogFilter {
   option (udpa.annotations.versioning).previous_message_type =
       "envoy.config.filter.accesslog.v2.AccessLogFilter";
@@ -91,6 +92,9 @@ message AccessLogFilter {
 
     // Log Type Filter
     LogTypeFilter log_type_filter = 13;
+
+    // Response code details filter.
+    ResponseCodeDetailsFilter response_code_details_filter = 14;
   }
 }
 
@@ -264,6 +268,17 @@ message ResponseFlagFilter {
       }
     }
   }];
+}
+
+// Filters requests that received responses with :ref:`response code details
+// <config_access_log_format_response_code_details>` matching any of the configured
+// string matchers.
+message ResponseCodeDetailsFilter {
+  repeated type.matcher.v3.StringMatcher details = 1
+      [(validate.rules).repeated = {min_items: 1}];
+
+  // If set, the filter will instead block responses whose code details match the configured list.
+  bool exclude = 2;
 }
 
 // Filters gRPC requests based on their response status. If a gRPC status is not

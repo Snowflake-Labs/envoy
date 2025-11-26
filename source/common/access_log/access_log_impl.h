@@ -192,6 +192,23 @@ private:
 };
 
 /**
+ * Filters requests that have response code details matching any configured string matcher.
+ */
+class ResponseCodeDetailsFilter : public Filter {
+public:
+  ResponseCodeDetailsFilter(
+      const envoy::config::accesslog::v3::ResponseCodeDetailsFilter& config,
+      Server::Configuration::CommonFactoryContext& context);
+
+  bool evaluate(const Formatter::HttpFormatterContext& context,
+                const StreamInfo::StreamInfo& info) const override;
+
+private:
+  std::vector<Matchers::StringMatcherPtr> matchers_;
+  bool exclude_{false};
+};
+
+/**
  * Filters requests that have a response with a gRPC status. Because the gRPC protocol does not
  * guarantee a gRPC status code, if a gRPC status code is not available, then the filter will infer
  * the gRPC status code from an HTTP status code if available.

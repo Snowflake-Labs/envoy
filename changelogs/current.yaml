@@ -317,6 +317,14 @@ removed_config_or_runtime:
     Removed runtime guard ``envoy.reloadable_features.proxy_104`` and legacy code paths.
 
 new_features:
+- area: rbac
+  change: |
+    Added :ref:`enforce_on_new_connection
+    <envoy_v3_api_field_extensions.filters.network.rbac.v3.RBAC.enforce_on_new_connection>` to the
+    RBAC network filter and registered it as an upstream network filter so that clusters can evaluate
+    RBAC policies as soon as an upstream connection is established. This enables egress CONNECT
+    proxies to attach RBAC filters directly to upstream clusters and block requests to specific CIDR
+    ranges before any bytes are forwarded to the destination.
 - area: router
   change: |
     Added :ref:`use_hash_policy <envoy_v3_api_field_config.route.v3.WeightedCluster.use_hash_policy>`

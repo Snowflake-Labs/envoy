@@ -28,7 +28,7 @@ option (udpa.annotations.file_status).package_version_status = ACTIVE;
 //
 // Header should not be used in rules/shadow_rules in RBAC network filter as
 // this information is only available in :ref:`RBAC http filter <config_http_filters_rbac>`.
-// [#next-free-field: 9]
+// [#next-free-field: 10]
 message RBAC {
   option (udpa.annotations.versioning).previous_message_type =
       "envoy.config.filter.network.rbac.v2.RBAC";
@@ -95,4 +95,9 @@ message RBAC {
   // This is useful to provide a better protection for Envoy against clients that retries
   // aggressively when the connection is rejected by the RBAC filter.
   google.protobuf.Duration delay_deny = 8;
+
+  // When set, RBAC policies are evaluated as soon as the connection is established, before any
+  // payload bytes are read from the peer. This is primarily useful for upstream network filters
+  // where Envoy must reject a CONNECT attempt prior to forwarding any data to the upstream host.
+  bool enforce_on_new_connection = 9;
 }

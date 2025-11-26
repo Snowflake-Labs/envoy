@@ -5,6 +5,7 @@
 #include "source/extensions/filters/network/rbac/config.h"
 #include "source/extensions/filters/network/rbac/rbac_filter.h"
 
+#include "test/mocks/network/mocks.h"
 #include "test/mocks/server/factory_context.h"
 
 #include "fmt/printf.h"
@@ -98,6 +99,22 @@ TEST_F(RoleBasedAccessControlNetworkFilterConfigFactoryTest, ValidProto) {
   cb(connection);
 }
 
+TEST_F(RoleBasedAccessControlNetworkFilterConfigFactoryTest, ValidProtoUpstreamFactory) {
+  envoy::config::rbac::v3::Policy policy;
+  policy.add_permissions()->set_any(true);
+  policy.add_principals()->set_any(true);
+  envoy::extensions::filters::network::rbac::v3::RBAC config;
+  config.set_stat_prefix("stats");
+  (*config.mutable_rules()->mutable_policies())["foo"] = policy;
+
+  NiceMock<Server::Configuration::MockUpstreamFactoryContext> context;
+  RoleBasedAccessControlUpstreamNetworkFilterConfigFactory factory;
+  Network::FilterFactoryCb cb = factory.createFilterFactoryFromProto(config, context);
+  Network::MockConnection connection;
+  EXPECT_CALL(connection, addReadFilter(_));
+  cb(connection);
+}
+
 TEST_F(RoleBasedAccessControlNetworkFilterConfigFactoryTest, ValidMatcherProto) {
   envoy::config::rbac::v3::Action action;
   action.set_name("foo");
@@ -121,6 +138,12 @@ TEST_F(RoleBasedAccessControlNetworkFilterConfigFactoryTest, ValidMatcherProto) 
 
 TEST_F(RoleBasedAccessControlNetworkFilterConfigFactoryTest, EmptyProto) {
   RoleBasedAccessControlNetworkFilterConfigFactory factory;
+  EXPECT_NE(nullptr, dynamic_cast<envoy::extensions::filters::network::rbac::v3::RBAC*>(
+                         factory.createEmptyConfigProto().get()));
+}
+
+TEST_F(RoleBasedAccessControlNetworkFilterConfigFactoryTest, UpstreamEmptyProto) {
+  RoleBasedAccessControlUpstreamNetworkFilterConfigFactory factory;
   EXPECT_NE(nullptr, dynamic_cast<envoy::extensions::filters::network::rbac::v3::RBAC*>(
                          factory.createEmptyConfigProto().get()));
 }

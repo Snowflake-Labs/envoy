@@ -37,10 +37,9 @@ public:
     // No per-logger log level setting needed
   }
 
-  void
-  setupPolicy(bool with_policy = true, bool continuous = false,
-              envoy::config::rbac::v3::RBAC::Action action = envoy::config::rbac::v3::RBAC::ALLOW,
-              int64_t delay_deny_duration_ms = 0) {
+  void setupPolicy(bool with_policy = true, bool continuous = false,
+                   envoy::config::rbac::v3::RBAC::Action action = envoy::config::rbac::v3::RBAC::ALLOW,
+                   int64_t delay_deny_duration_ms = 0, bool enforce_on_new_connection = false) {
 
     envoy::extensions::filters::network::rbac::v3::RBAC config;
     config.set_stat_prefix("tcp.");
@@ -72,6 +71,11 @@ public:
     if (delay_deny_duration_ms > 0) {
       (*config.mutable_delay_deny()) =
           ProtobufUtil::TimeUtil::MillisecondsToDuration(delay_deny_duration_ms);
+    }
+
+    config_.reset();
+    if (enforce_on_new_connection) {
+      config.set_enforce_on_new_connection(true);
     }
 
     config_ = std::make_shared<RoleBasedAccessControlFilterConfig>(
@@ -346,6 +350,8 @@ TEST_F(RoleBasedAccessControlNetworkFilterTest, Denied) {
   setMetadata();
 
   EXPECT_CALL(callbacks_.connection_, close(Network::ConnectionCloseType::NoFlush, _)).Times(2);
+  EXPECT_CALL(stream_info_, setResponseFlag(StreamInfo::CoreResponseFlag::UnauthorizedExternalService))
+      .Times(1);
 
   // Call onData() twice, should only increase stats once.
   EXPECT_EQ(Network::FilterStatus::StopIteration, filter_->onData(data_, false));
@@ -369,6 +375,43 @@ TEST_F(RoleBasedAccessControlNetworkFilterTest, Denied) {
             filter_meta.fields().at("shadow_rules_prefix_shadow_engine_result").string_value());
 }
 
+TEST_F(RoleBasedAccessControlNetworkFilterTest, EnforceOnNewConnectionDenied) {
+  setupPolicy(true, false, envoy::config::rbac::v3::RBAC::ALLOW, 0, true);
+
+  setDestinationPort(456);
+  setMetadata();
+
+  EXPECT_CALL(callbacks_.connection_, close(Network::ConnectionCloseType::NoFlush, _));
+  EXPECT_CALL(stream_info_, setResponseFlag(StreamInfo::CoreResponseFlag::UnauthorizedExternalService))
+      .Times(1);
+  EXPECT_EQ(Network::FilterStatus::StopIteration, filter_->onNewConnection());
+  EXPECT_EQ(0U, config_->stats().allowed_.value());
+  EXPECT_EQ(1U, config_->stats().denied_.value());
+  EXPECT_EQ(1U, config_->stats().shadow_allowed_.value());
+  EXPECT_EQ(0U, config_->stats().shadow_denied_.value());
+
+  auto filter_meta =
+      stream_info_.dynamicMetadata().filter_metadata().at(NetworkFilterNames::get().Rbac);
+  EXPECT_EQ(
+      "bar",
+      filter_meta.fields().at("shadow_rules_prefix_shadow_effective_policy_id").string_value());
+  EXPECT_EQ("allowed",
+            filter_meta.fields().at("shadow_rules_prefix_shadow_engine_result").string_value());
+}
+
+TEST_F(RoleBasedAccessControlNetworkFilterTest, EnforceOnNewConnectionAllowed) {
+  setupPolicy(true, false, envoy::config::rbac::v3::RBAC::ALLOW, 0, true);
+
+  setDestinationPort(123);
+
+  EXPECT_EQ(Network::FilterStatus::Continue, filter_->onNewConnection());
+  EXPECT_EQ(Network::FilterStatus::Continue, filter_->onData(data_, false));
+  EXPECT_EQ(1U, config_->stats().allowed_.value());
+  EXPECT_EQ(0U, config_->stats().denied_.value());
+  EXPECT_EQ(0U, config_->stats().shadow_allowed_.value());
+  EXPECT_EQ(1U, config_->stats().shadow_denied_.value());
+}
+
 TEST_F(RoleBasedAccessControlNetworkFilterTest, DelayDenied) {
   int64_t delay_deny_duration_ms = 500;
   setupPolicy(true, false, envoy::config::rbac::v3::RBAC::ALLOW, delay_deny_duration_ms);
@@ -377,6 +420,8 @@ TEST_F(RoleBasedAccessControlNetworkFilterTest, DelayDenied) {
   // Only call close() once since the connection is delay denied.
   EXPECT_CALL(callbacks_.connection_, readDisable(true));
   EXPECT_CALL(callbacks_.connection_, close(Network::ConnectionCloseType::NoFlush, _));
+  EXPECT_CALL(stream_info_, setResponseFlag(StreamInfo::CoreResponseFlag::UnauthorizedExternalService))
+      .Times(1);
 
   Event::MockTimer* delay_timer =
       new NiceMock<Event::MockTimer>(&callbacks_.connection_.dispatcher_);

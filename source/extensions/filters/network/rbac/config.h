@@ -5,6 +5,7 @@
 
 #include "source/extensions/filters/network/common/factory_base.h"
 #include "source/extensions/filters/network/well_known_names.h"
+#include "envoy/server/filter_config.h"
 
 namespace Envoy {
 namespace Extensions {
@@ -25,6 +26,18 @@ private:
   Network::FilterFactoryCb createFilterFactoryFromProtoTyped(
       const envoy::extensions::filters::network::rbac::v3::RBAC& proto_config,
       Server::Configuration::FactoryContext& context) override;
+};
+
+class RoleBasedAccessControlUpstreamNetworkFilterConfigFactory
+    : public Server::Configuration::NamedUpstreamNetworkFilterConfigFactory {
+public:
+  RoleBasedAccessControlUpstreamNetworkFilterConfigFactory() = default;
+
+  Network::FilterFactoryCb createFilterFactoryFromProto(
+      const Protobuf::Message& config,
+      Server::Configuration::UpstreamFactoryContext& context) override;
+  ProtobufTypes::MessagePtr createEmptyConfigProto() override;
+  std::string name() const override { return NetworkFilterNames::get().Rbac; }
 };
 
 } // namespace RBACFilter

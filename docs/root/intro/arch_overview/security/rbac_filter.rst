@@ -15,6 +15,12 @@ or as a :ref:`HTTP filter <config_http_filters_rbac>` or both. If the request is
 by the network filter then the connection will be closed. If the request is deemed unauthorized by
 the HTTP filter the request will be denied with 403 (Forbidden) response.
 
+When the network filter is attached to an upstream cluster (for example, to block CONNECT tunnels to
+specific CIDR ranges), set
+:ref:`enforce_on_new_connection <envoy_v3_api_field_extensions.filters.network.rbac.v3.RBAC.enforce_on_new_connection>`
+so that the RBAC engine evaluates the upstream destination metadata before Envoy forwards any bytes
+to the remote host.
+
 The RBAC filter's rules can be either configured with a list of
 :ref:`policies <envoy_v3_api_field_config.rbac.v3.RBAC.policies>` or the
 :ref:`matching API <envoy_v3_api_msg_.xds.type.matcher.v3.Matcher>`.

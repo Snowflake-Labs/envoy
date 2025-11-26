@@ -1,3 +1,5 @@
+#include "envoy/config/rbac/v3/rbac.pb.h"
+#include "envoy/extensions/filters/network/rbac/v3/rbac.pb.h"
 #include "envoy/extensions/filters/network/tcp_proxy/v3/tcp_proxy.pb.h"
 #include "envoy/service/discovery/v3/discovery.pb.h"
 #include "envoy/service/extension/v3/config_discovery.pb.h"
@@ -39,6 +41,28 @@ public:
           configuration.set_bytes_to_drain(bytes_to_drain);
           filter->mutable_typed_config()->PackFrom(configuration);
         });
+  }
+
+  void addDenyAllRbacFilter() {
+    config_helper_.addConfigModifier([](envoy::config::bootstrap::v3::Bootstrap& bootstrap) {
+      auto* cluster = bootstrap.mutable_static_resources()->mutable_clusters(0);
+      auto* filter = cluster->add_filters();
+      filter->set_name("envoy.filters.network.rbac");
+
+      envoy::extensions::filters::network::rbac::v3::RBAC rbac;
+      rbac.set_stat_prefix("upstream_rbac");
+      rbac.set_enforce_on_new_connection(true);
+      auto* rules = rbac.mutable_rules();
+      rules->set_action(envoy::config::rbac::v3::RBAC::DENY);
+      envoy::config::rbac::v3::Policy policy;
+      auto* permission = policy.add_permissions();
+      auto* cidr = permission->mutable_destination_ip();
+      cidr->set_address_prefix("0.0.0.0");
+      cidr->mutable_prefix_len()->set_value(0);
+      policy.add_principals()->set_any(true);
+      (*rules->mutable_policies())["deny_all"] = policy;
+      filter->mutable_typed_config()->PackFrom(rbac);
+    });
   }
 
   void sendDataVerifyResults(uint32_t bytes_drained) {
@@ -107,6 +131,20 @@ TEST_P(StaticUpstreamNetworkFilterIntegrationTest, TwoStaticFilters) {
   initialize();
 
   sendDataVerifyResults(8);
+}
+
+TEST_P(StaticUpstreamNetworkFilterIntegrationTest, RbacDenyOnNewConnection) {
+  addDenyAllRbacFilter();
+  initialize();
+
+  test_server_->waitUntilListenersReady();
+  IntegrationTcpClientPtr tcp_client = makeTcpConnection(lookupPort(port_name_));
+  ASSERT_TRUE(tcp_client->write(data_));
+  tcp_client->waitForDisconnect();
+
+  FakeRawConnectionPtr fake_upstream_connection;
+  ASSERT_TRUE(fake_upstreams_[0]->waitForRawConnection(fake_upstream_connection));
+  fake_upstream_connection->waitForDisconnect();
 }
 
 class UpstreamNetworkExtensionDiscoveryIntegrationTest

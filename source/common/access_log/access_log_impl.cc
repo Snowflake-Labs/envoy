@@ -1,5 +1,6 @@
 #include "source/common/access_log/access_log_impl.h"
 
+#include <algorithm>
 #include <cstdint>
 #include <string>
 
@@ -78,6 +79,11 @@ FilterPtr FilterFactory::fromProto(const envoy::config::accesslog::v3::AccessLog
   case envoy::config::accesslog::v3::AccessLogFilter::FilterSpecifierCase::kResponseFlagFilter:
     MessageUtil::validate(config, validation_visitor);
     return FilterPtr{new ResponseFlagFilter(config.response_flag_filter())};
+  case envoy::config::accesslog::v3::AccessLogFilter::FilterSpecifierCase::
+      kResponseCodeDetailsFilter:
+    MessageUtil::validate(config, validation_visitor);
+    return FilterPtr{new ResponseCodeDetailsFilter(config.response_code_details_filter(),
+                                                   context.serverFactoryContext())};
   case envoy::config::accesslog::v3::AccessLogFilter::FilterSpecifierCase::kGrpcStatusFilter:
     MessageUtil::validate(config, validation_visitor);
     return FilterPtr{new GrpcStatusFilter(config.grpc_status_filter())};
@@ -247,6 +253,24 @@ bool ResponseFlagFilter::evaluate(const Formatter::HttpFormatterContext&,
     return false;
   }
   return info.hasAnyResponseFlag();
+}
+
+ResponseCodeDetailsFilter::ResponseCodeDetailsFilter(
+    const envoy::config::accesslog::v3::ResponseCodeDetailsFilter& config,
+    Server::Configuration::CommonFactoryContext& context)
+    : exclude_(config.exclude()) {
+  for (const auto& matcher_config : config.details()) {
+    matchers_.emplace_back(std::make_unique<Matchers::StringMatcherImpl>(matcher_config, context));
+  }
+}
+
+bool ResponseCodeDetailsFilter::evaluate(const Formatter::HttpFormatterContext&,
+                                         const StreamInfo::StreamInfo& info) const {
+  const bool matched =
+      info.responseCodeDetails().has_value() &&
+      std::any_of(matchers_.begin(), matchers_.end(),
+                  [&](const auto& matcher) { return matcher->match(info.responseCodeDetails().value()); });
+  return exclude_ ? !matched : matched;
 }
 
 GrpcStatusFilter::GrpcStatusFilter(const envoy::config::accesslog::v3::GrpcStatusFilter& config) {

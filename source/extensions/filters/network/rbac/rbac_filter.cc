@@ -3,6 +3,7 @@
 #include "envoy/buffer/buffer.h"
 #include "envoy/extensions/filters/network/rbac/v3/rbac.pb.h"
 #include "envoy/network/connection.h"
+#include "envoy/stream_info/stream_info.h"
 
 #include "source/common/network/matching/inputs.h"
 #include "source/common/ssl/matching/inputs.h"
@@ -70,9 +71,21 @@ RoleBasedAccessControlFilterConfig::RoleBasedAccessControlFilterConfig(
       shadow_engine_(Filters::Common::RBAC::createShadowEngine(
           proto_config, context, validation_visitor, action_validation_visitor_)),
       enforcement_type_(proto_config.enforcement_type()),
-      delay_deny_ms_(PROTOBUF_GET_MS_OR_DEFAULT(proto_config, delay_deny, 0)) {}
+      delay_deny_ms_(PROTOBUF_GET_MS_OR_DEFAULT(proto_config, delay_deny, 0)),
+      enforce_on_new_connection_(proto_config.enforce_on_new_connection()) {}
 
 Network::FilterStatus RoleBasedAccessControlFilter::onData(Buffer::Instance&, bool) {
+  return evaluatePolicies();
+}
+
+Network::FilterStatus RoleBasedAccessControlFilter::onNewConnection() {
+  if (!config_->enforceOnNewConnection()) {
+    return Network::FilterStatus::Continue;
+  }
+  return evaluatePolicies();
+}
+
+Network::FilterStatus RoleBasedAccessControlFilter::evaluatePolicies() {
   if (is_delay_denied_) {
     return Network::FilterStatus::StopIteration;
   }
@@ -133,6 +146,11 @@ Network::FilterStatus RoleBasedAccessControlFilter::onData(Buffer::Instance&, bo
   } else if (engine_result_ == Deny) {
     callbacks_->connection().streamInfo().setConnectionTerminationDetails(
         Filters::Common::RBAC::responseDetail(log_policy_id));
+    if (!response_flag_set_) {
+      callbacks_->connection().streamInfo().setResponseFlag(
+          StreamInfo::CoreResponseFlag::UnauthorizedExternalService);
+      response_flag_set_ = true;
+    }
 
     if (const std::chrono::milliseconds duration = config_->delayDenyMs();
         duration > std::chrono::milliseconds(0)) {

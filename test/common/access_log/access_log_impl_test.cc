@@ -1103,6 +1103,58 @@ typed_config:
                           ProtoValidationException, "Proto constraint validation failed");
 }
 
+TEST_F(AccessLogImplTest, ResponseCodeDetailsFilterMatches) {
+  const std::string yaml = R"EOF(
+name: accesslog
+filter:
+  response_code_details_filter:
+    details:
+      - contains: "rbac_access_denied_matched_policy"
+typed_config:
+  "@type": type.googleapis.com/envoy.extensions.access_loggers.file.v3.FileAccessLog
+  path: /dev/null
+  )EOF";
+
+  InstanceSharedPtr log = AccessLogFactory::fromProto(parseAccessLogFromV3Yaml(yaml), context_);
+
+  EXPECT_CALL(*file_, write(_)).Times(0);
+  log->log({&request_headers_, &response_headers_, &response_trailers_}, stream_info_);
+
+  stream_info_.setResponseCodeDetails(
+      "upstream_reset_before_response_started{connection_termination_details="
+      "rbac_access_denied_matched_policy[deny_all]}");
+  EXPECT_CALL(*file_, write(_));
+  log->log({&request_headers_, &response_headers_, &response_trailers_}, stream_info_);
+
+  stream_info_.setResponseCodeDetails("upstream_reset_before_response_started{protocol_error}");
+  EXPECT_CALL(*file_, write(_)).Times(0);
+  log->log({&request_headers_, &response_headers_, &response_trailers_}, stream_info_);
+}
+
+TEST_F(AccessLogImplTest, ResponseCodeDetailsFilterExclude) {
+  const std::string yaml = R"EOF(
+name: accesslog
+filter:
+  response_code_details_filter:
+    exclude: true
+    details:
+      - exact: "via_upstream"
+typed_config:
+  "@type": type.googleapis.com/envoy.extensions.access_loggers.file.v3.FileAccessLog
+  path: /dev/null
+  )EOF";
+
+  InstanceSharedPtr log = AccessLogFactory::fromProto(parseAccessLogFromV3Yaml(yaml), context_);
+  stream_info_.setResponseCodeDetails("via_upstream");
+
+  EXPECT_CALL(*file_, write(_)).Times(0);
+  log->log({&request_headers_, &response_headers_, &response_trailers_}, stream_info_);
+
+  stream_info_.setResponseCodeDetails("upstream_reset_before_response_started");
+  EXPECT_CALL(*file_, write(_));
+  log->log({&request_headers_, &response_headers_, &response_trailers_}, stream_info_);
+}
+
 TEST_F(AccessLogImplTest, ValidateTypedConfig) {
   const std::string yaml = R"EOF(
 name: accesslog

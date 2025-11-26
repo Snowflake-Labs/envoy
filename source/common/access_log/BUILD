@@ -21,6 +21,7 @@ envoy_cc_library(
         "//envoy/runtime:runtime_interface",
         "//envoy/upstream:upstream_interface",
         "//source/common/common:assert_lib",
+        "//source/common/common:matchers_lib",
         "//source/common/common:utility_lib",
         "//source/common/config:utility_lib",
         "//source/common/formatter:substitution_formatter_lib",
@@ -33,6 +34,7 @@ envoy_cc_library(
         "//source/common/tracing:http_tracer_lib",
         "@com_google_absl//absl/hash",
         "@envoy_api//envoy/config/accesslog/v3:pkg_cc_proto",
+        "@envoy_api//envoy/type/matcher/v3:pkg_cc_proto",
         "@envoy_api//envoy/type/v3:pkg_cc_proto",
     ],
 )

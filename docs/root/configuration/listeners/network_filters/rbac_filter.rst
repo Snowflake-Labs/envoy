@@ -18,6 +18,18 @@ RBAC filter and the upstream backend.
 * This filter should be configured with the type URL ``type.googleapis.com/envoy.extensions.filters.network.rbac.v3.RBAC``.
 * :ref:`v3 API reference <envoy_v3_api_msg_extensions.filters.network.rbac.v3.RBAC>`
 
+Upstream network usage
+----------------------
+
+The RBAC network filter can also be attached to upstream clusters via :ref:`cluster filters
+<envoy_v3_api_field_config.cluster.v3.Cluster.filters>` to enforce policies before Envoy tunnels a
+CONNECT request to a remote host. When used upstream, set
+:ref:`enforce_on_new_connection <envoy_v3_api_field_extensions.filters.network.rbac.v3.RBAC.enforce_on_new_connection>`
+to ``true`` so that the RBAC engine evaluates the destination IP information as soon as the
+connection is established, before any payload bytes are proxied to the upstream host. This allows
+operators to implement static blocklists for specific CIDR ranges in front of HTTP CONNECT egress
+proxies.
+
 Statistics
 ----------
 

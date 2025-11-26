@@ -60,6 +60,7 @@ public:
   }
 
   std::chrono::milliseconds delayDenyMs() const { return delay_deny_ms_; }
+  bool enforceOnNewConnection() const { return enforce_on_new_connection_; }
 
 private:
   Filters::Common::RBAC::RoleBasedAccessControlFilterStats stats_;
@@ -70,6 +71,7 @@ private:
   std::unique_ptr<const Filters::Common::RBAC::RoleBasedAccessControlEngine> shadow_engine_;
   const envoy::extensions::filters::network::rbac::v3::RBAC::EnforcementType enforcement_type_;
   std::chrono::milliseconds delay_deny_ms_;
+  const bool enforce_on_new_connection_;
 };
 
 using RoleBasedAccessControlFilterConfigSharedPtr =
@@ -89,7 +91,7 @@ public:
 
   // Network::ReadFilter
   Network::FilterStatus onData(Buffer::Instance& data, bool end_stream) override;
-  Network::FilterStatus onNewConnection() override { return Network::FilterStatus::Continue; };
+  Network::FilterStatus onNewConnection() override;
   void initializeReadFilterCallbacks(Network::ReadFilterCallbacks& callbacks) override {
     callbacks_ = &callbacks;
     callbacks_->connection().addConnectionCallbacks(*this);
@@ -112,8 +114,10 @@ private:
   Result checkEngine(Filters::Common::RBAC::EnforcementMode mode) const;
   void closeConnection() const;
   void resetTimerState();
+  Network::FilterStatus evaluatePolicies();
   Event::TimerPtr delay_timer_{nullptr};
   bool is_delay_denied_{false};
+  bool response_flag_set_{false};
 };
 
 } // namespace RBACFilter

@@ -796,6 +796,7 @@ envoy.filters.network.rbac:
   - envoy.filters.network
   security_posture: robust_to_untrusted_downstream
   status: stable
+  status_upstream: alpha
   type_urls:
   - envoy.extensions.filters.network.rbac.v3.RBAC
 envoy.filters.network.redis_proxy:
